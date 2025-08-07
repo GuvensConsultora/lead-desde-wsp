@@ -10,7 +10,7 @@ class WhatsAppMessage(models.Model):
     def create(self, vals):
         
         # Agregamos texto antes de crear el mensaje
-        if 'body' in vals and vals.get('direction') == 'inbound':
+        if 'body' in vals:
             texto_estandar = "[Mensaje recibido por WhatsApp]"
             vals['body'] = f"{texto_estandar}\n{vals['body']}"
 
