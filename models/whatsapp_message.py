@@ -7,13 +7,13 @@ class WhatsAppMessage(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        _logger.info("📨 vals_list entrante en WhatsAppMessage.create: %s", vals_list)
+        _logger.info("📨 vals_list entrante: %s", vals_list)
 
         messages = super().create(vals_list)
 
         for message in messages:
             if message.direction == 'inbound' and message.phone:
-            # lógica extra si querés
-                pass
+                _logger.info("✔️ Mensaje entrante de %s: %s", message.phone, message.body)
+                # seguir con la lógica de creación de lead o partner
 
         return messages
