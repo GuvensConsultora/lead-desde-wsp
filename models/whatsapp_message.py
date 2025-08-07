@@ -1,4 +1,4 @@
-11;rgb:3030/0a0a/2424from odoo import models, api
+from odoo import models, api
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -7,7 +7,7 @@ class WhatsAppMessage(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        _logger.info("📨 vals_list entrante: %s", vals_list)
+        _logger.info("vals_list entrante: %s", vals_list)
 
         messages = super().create(vals_list)
 
