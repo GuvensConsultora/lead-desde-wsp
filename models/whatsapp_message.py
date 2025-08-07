@@ -1,19 +1,19 @@
 from odoo import models, api
-from odoo.exceptions import UserError
-
-
+import logging
+_logger = logging.getLogger(__name__)
 
 class WhatsAppMessage(models.Model):
     _inherit = 'whatsapp.message'
 
-    @api.model
-    def create(self, vals):
-        
-        # Agregamos texto antes de crear el mensaje
-        if 'body' in vals:
-            texto_estandar = "[Mensaje recibido por WhatsApp]"
-            vals['body'] = f"{texto_estandar}\n{vals['body']}"
+    @api.model_create_multi
+    def create(self, vals_list):
+        _logger.info("📨 vals_list entrante en WhatsAppMessage.create: %s", vals_list)
 
-        message = super().create(vals)
-        
-        return message
+        messages = super().create(vals_list)
+
+        for message in messages:
+            if message.direction == 'inbound' and message.phone:
+            # lógica extra si querés
+                pass
+
+        return messages
