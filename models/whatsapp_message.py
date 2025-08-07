@@ -8,6 +8,12 @@ class WhatsAppMessage(models.Model):
 
     @api.model
     def create(self, vals):
-        message = super().create(vals)
+        
+        # Agregamos texto antes de crear el mensaje
+        if 'body' in vals and vals.get('direction') == 'inbound':
+            texto_estandar = "[Mensaje recibido por WhatsApp]"
+            vals['body'] = f"{texto_estandar}\n{vals['body']}"
 
+        message = super().create(vals)
+        
         return message
