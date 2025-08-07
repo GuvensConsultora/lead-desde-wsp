@@ -1,4 +1,4 @@
-from odoo import models, api
+11;rgb:3030/0a0a/2424from odoo import models, api
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -11,9 +11,7 @@ class WhatsAppMessage(models.Model):
 
         messages = super().create(vals_list)
 
-        for message in messages:
-            if message.direction == 'inbound' and message.phone:
-                _logger.info("✔️ Mensaje entrante de %s: %s", message.phone, message.body)
+        #_logger.info("✔️ Mensaje entrante de %s: %s", message.phone, message.body)
                 # seguir con la lógica de creación de lead o partner
 
         return messages
