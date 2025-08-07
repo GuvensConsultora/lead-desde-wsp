@@ -1,4 +1,7 @@
 from odoo import models, api
+from odoo.exceptions import UserError
+
+
 
 class WhatsAppMessage(models.Model):
     _inherit = 'whatsapp.message'
@@ -6,6 +9,9 @@ class WhatsAppMessage(models.Model):
     @api.model
     def create(self, vals):
         message = super().create(vals)
+        raise UserError("Este número está bloqueado y no se puede crear un lead.")
+
+
 
         if message.direction == 'inbound' and message.phone:
             partner = self.env['res.partner'].search([
