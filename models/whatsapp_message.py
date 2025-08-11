@@ -17,7 +17,7 @@ class WhatsAppMessage(models.Model):
                 # seguir con la lógica de creación de lead o partner
         reply_text = "Gracias por tu mensaje, en breve te responderemos."
         self.env['whatsapp.message'].create({
-            'phone': self.phone,
+            'phone': vals_list.mobile_number,
             'body': reply_text,
             'direction': 'out'
         })
