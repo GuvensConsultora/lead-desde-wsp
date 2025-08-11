@@ -20,6 +20,6 @@ class WhatsAppMessage(models.Model):
         #    'mobile_number': vals_list[0].get('mobile_number'),
         #    'body': reply_text,
         #    'message_type': 'outbound'
-        })
+        #})
                 
         return messages
