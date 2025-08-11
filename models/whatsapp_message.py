@@ -15,11 +15,11 @@ class WhatsAppMessage(models.Model):
         _logger.info("CONTENIDO: %s", rs_msj.body)
         #_logger.info("✔️ Mensaje entrante de %s: %s", message.phone, message.body)
                 # seguir con la lógica de creación de lead o partner
-        reply_text = "Gracias por tu mensaje, en breve te responderemos."
-        self.env['whatsapp.message'].create({
-            'mobile_number': vals_list[0].get('mobile_number'),
-            'body': reply_text,
-            'message_type': 'outbound'
+        #reply_text = "Gracias por tu mensaje, en breve te responderemos."
+        #self.env['whatsapp.message'].create({
+        #    'mobile_number': vals_list[0].get('mobile_number'),
+        #    'body': reply_text,
+        #    'message_type': 'outbound'
         })
                 
         return messages
