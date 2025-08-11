@@ -11,7 +11,8 @@ class WhatsAppMessage(models.Model):
 
         messages = super().create(vals_list)
 
+        _logger.info("IDE MENSAJES: %s", messages)
         #_logger.info("✔️ Mensaje entrante de %s: %s", message.phone, message.body)
                 # seguir con la lógica de creación de lead o partner
-
+                
         return messages
