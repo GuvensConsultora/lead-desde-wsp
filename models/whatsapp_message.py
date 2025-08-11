@@ -19,7 +19,7 @@ class WhatsAppMessage(models.Model):
         self.env['whatsapp.message'].create({
             'mobile_number': vals_list[0].get('mobile_number'),
             'body': reply_text,
-            'direction': 'out'
+            'message_type': 'outbound'
         })
                 
         return messages
