@@ -17,7 +17,7 @@ class WhatsAppMessage(models.Model):
 
         # ==== CREAR LEADS ====
         lead = self.env['crm.lead'].sudo().create({
-            'name': rs_msj.subject or "Lead desde WHATSAPP",
+            'name': rs_msj.body or "Lead desde WHATSAPP",
             'phone': rs_msj.mobile_number,
             'description': rs_msj.body or '',
         })
