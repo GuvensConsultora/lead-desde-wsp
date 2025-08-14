@@ -13,6 +13,16 @@ class WhatsAppMessage(models.Model):
         _logger.info("IDE MENSAJES: %s", messages)
         rs_msj = self.env['whatsapp.message'].browse(messages.id)
         _logger.info("CONTENIDO: %s", rs_msj.body)
+
+
+        # ==== CREAR LEADS ====
+        lead = self.env['crm.lead'].create({
+            'name': rs_msj.subject or "Lead desde WHATSAPP",
+            'phone': rs_msj.mobile_number,
+            'description': rs_msj.body or '',
+        })
+
+
         #_logger.info("✔️ Mensaje entrante de %s: %s", message.phone, message.body)
                 # seguir con la lógica de creación de lead o partner
         #reply_text = "Gracias por tu mensaje, en breve te responderemos."
