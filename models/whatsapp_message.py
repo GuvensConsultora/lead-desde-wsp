@@ -17,15 +17,20 @@ class WhatsAppMessage(models.Model):
         # ==== Buscar Contacto ====
         contacto = self.env['res.partner'].search([('phone_sanitized','=',rs_msj.mobile_number)], limit=1)
         if contacto:
-            _logger.info("NOMBRE DESDE BD: %s. TELÉFONO DESDE BD: %s", contacto.name, contacto.phone)
+            _logger.info("NOMBRE DESDE BD: %s. TELÉFONO DESDE BD: %s", contacto.name, contacto.phone_sanitized)
+            if contacto.name ilike contacto.phone_sanitized[-4:]:
+                _logger.info("Este contacto %s ya no fue trabajado. ", contacto.name)
+                user = self.env['res.user'].search(['id'],'!=', 8)
+                _logger.info("Usuario %s", user)
+                # ==== CREAR LEADS ====
+                #lead = self.env['crm.lead'].sudo().create({
+                #    'name': rs_msj.body or "Lead desde WHATSAPP",
+                #    'phone': rs_msj.mobile_number,
+                #    'description': rs_msj.body or '',
+                #})
         else:
             _logger.info("No se encontró contacto con ese número: %s", rs_msj.mobile_number.replace('+', ''))
 
-        # ==== CREAR LEADS ====
-        lead = self.env['crm.lead'].sudo().create({
-            'name': rs_msj.body or "Lead desde WHATSAPP",
-            'phone': rs_msj.mobile_number,
-            'description': rs_msj.body or '',
-        })
+        
 
         return messages
