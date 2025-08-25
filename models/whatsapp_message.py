@@ -33,7 +33,7 @@ class WhatsAppMessage(models.Model):
                 #})
             else:
                 _logger.info("Este contacto %s ya fue trabajado. ", contacto.name)
-                _logger.info("Usuario %s", user)
+                _logger.info("Usuario %s", user.ids)
         else:
             _logger.info("No se encontró contacto con ese número: %s", rs_msj.mobile_number.replace('+', ''))
 
