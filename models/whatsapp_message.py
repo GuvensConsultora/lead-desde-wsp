@@ -20,7 +20,9 @@ class WhatsAppMessage(models.Model):
             _logger.info("NOMBRE DESDE BD: %s. TELÉFONO DESDE BD: %s", contacto.name, contacto.phone_sanitized)
             if contacto.name in contacto.phone_sanitized[-4:]:
                 _logger.info("Este contacto %s ya no fue trabajado. ", contacto.name)
-                user = self.env['res.user'].search(['id'],'!=', 8)
+                user = self.env['res.users'].search(['id'],'!=', 8)
+                for user in users:
+                    print(user.name)
                 _logger.info("Usuario %s", user)
                 # ==== CREAR LEADS ====
                 #lead = self.env['crm.lead'].sudo().create({
