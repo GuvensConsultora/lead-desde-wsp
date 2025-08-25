@@ -15,11 +15,11 @@ class WhatsAppMessage(models.Model):
         _logger.info("CONTENIDO: %s", rs_msj.body)
 
         # ==== Buscar Contacto ====
-        contacto = self.env['res.partner'].search([('phone','=',rs_msj.mobile_number)], limit=1)
+        contacto = self.env['res.partner'].search([('phone','=',rs_msj.mobile_number.replace('+', ''))], limit=1)
         if contacto:
             _logger.info("NOMBRE DESDE BD: %s. TELÉFONO DESDE BD: %s", contacto.name, contacto.phone)
         else:
-            _logger.info("No se encontró contacto con ese número: %s", rs_msj.mobile_number)
+            _logger.info("No se encontró contacto con ese número: %s", rs_msj.mobile_number.replace('+', ''))
 
         # ==== CREAR LEADS ====
         lead = self.env['crm.lead'].sudo().create({
@@ -28,14 +28,4 @@ class WhatsAppMessage(models.Model):
             'description': rs_msj.body or '',
         })
 
-
-        #_logger.info("✔️ Mensaje entrante de %s: %s", message.phone, message.body)
-                # seguir con la lógica de creación de lead o partner
-        #reply_text = "Gracias por tu mensaje, en breve te responderemos."
-        #self.env['whatsapp.message'].create({
-        #    'mobile_number': vals_list[0].get('mobile_number'),
-        #    'body': reply_text,
-        #    'message_type': 'outbound'
-        #})
-                
         return messages
