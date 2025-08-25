@@ -21,6 +21,7 @@ class WhatsAppMessage(models.Model):
             user = self.env['res.users'].search(['id'],'!=', 8)
             if contacto.name in contacto.phone_sanitized[-4:]:
                 _logger.info("Este contacto %s ya no fue trabajado. ", contacto.name)
+
                 for user in users:
                     print(user.name)
                 _logger.info("Usuario %s", user)
