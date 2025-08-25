@@ -14,7 +14,10 @@ class WhatsAppMessage(models.Model):
         rs_msj = self.env['whatsapp.message'].browse(messages.id)
         _logger.info("CONTENIDO: %s", rs_msj.body)
 
-
+        # ==== Buscar Contacto ====
+        contacto = self.env['res.partner'].search([('phone','=',rs_msj.mobile_number)])
+        _logger.info("NOMBRE DESDE BD: %s. TELÉFONO DESDE BD: %s", contacto.name contacto.phone)
+        
         # ==== CREAR LEADS ====
         lead = self.env['crm.lead'].sudo().create({
             'name': rs_msj.body or "Lead desde WHATSAPP",
