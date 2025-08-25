@@ -18,7 +18,7 @@ class WhatsAppMessage(models.Model):
         contacto = self.env['res.partner'].search([('phone_sanitized','=',rs_msj.mobile_number)], limit=1)
         if contacto:
             _logger.info("NOMBRE DESDE BD: %s. TELÉFONO DESDE BD: %s", contacto.name, contacto.phone_sanitized)
-            if contacto.name ilike contacto.phone_sanitized[-4:]:
+            if contacto.name in contacto.phone_sanitized[-4:]:
                 _logger.info("Este contacto %s ya no fue trabajado. ", contacto.name)
                 user = self.env['res.user'].search(['id'],'!=', 8)
                 _logger.info("Usuario %s", user)
