@@ -1,5 +1,5 @@
 from odoo import models, api
-import logging
+import logging, random
 _logger = logging.getLogger(__name__)
 
 class WhatsAppMessage(models.Model):
@@ -24,7 +24,7 @@ class WhatsAppMessage(models.Model):
 
                 for user in users:
                     print(user.name)
-                _logger.info("Usuario %s", user)
+                _logger.info("Usuario %s", user.ids)
                 # ==== CREAR LEADS ====
                 #lead = self.env['crm.lead'].sudo().create({
                 #    'name': rs_msj.body or "Lead desde WHATSAPP",
