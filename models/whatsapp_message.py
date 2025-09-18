@@ -32,7 +32,7 @@ class WhatsAppMessage(models.Model):
                 #    'description': rs_msj.body or '',
                 #})
             else:
-                _logger.info("Este contacto %s ya fue trabajado. ", contacto.name)
+                _logger.info("Este contacto %s ya fue trabajado. Creado el: %s ", contacto.name, contacto.create_date)
                 _logger.info("Usuario %s", user.ids)
         else:
             _logger.info("No se encontró contacto con ese número: %s", rs_msj.mobile_number.replace('+', ''))
