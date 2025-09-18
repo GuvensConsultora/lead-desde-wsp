@@ -19,21 +19,14 @@ class WhatsAppMessage(models.Model):
         if contacto:
             _logger.info("NOMBRE DESDE BD: %s. TELÉFONO DESDE BD: %s  FECHA DE CREACIÓN: %S", contacto.name, contacto.phone_sanitized, contacto.create_date)
             user = self.env['res.users'].search([('active', '=', True),('id','!=', 8)])
-            if contacto.name in contacto.phone_sanitized[-4:]:
-                _logger.info("Este contacto %s ya no fue trabajado. Creado el %s", contacto.name, contacto.create_date)
-
-                for user in users:
-                    print(user.name)
-                _logger.info("Usuario %s", user.ids)
                 # ==== CREAR LEADS ====
                 #lead = self.env['crm.lead'].sudo().create({
                 #    'name': rs_msj.body or "Lead desde WHATSAPP",
                 #    'phone': rs_msj.mobile_number,
                 #    'description': rs_msj.body or '',
                 #})
-            else:
-                _logger.info("Este contacto %s ya fue trabajado. Creado el: %s ", contacto.name, contacto.create_date)
-                _logger.info("Usuario %s", user.ids)
+            _logger.info("Este contacto %s ya fue trabajado. Creado el: %s ", contacto.name, contacto.create_date)
+            _logger.info("Usuario %s", user.ids)
         else:
             _logger.info("No se encontró contacto con ese número: %s", rs_msj.mobile_number.replace('+', ''))
 
