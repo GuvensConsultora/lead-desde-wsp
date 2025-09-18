@@ -10,9 +10,9 @@ class WhatsAppMessage(models.Model):
         _logger.info("vals_list entrante: %s", vals_list)
 
         messages = super().create(vals_list)
-        _logger.info("IDE MENSAJES: %s", messages)
+        _logger.info("IDE MENSAJES: %s con fecha %s", messages,)
         rs_msj = self.env['whatsapp.message'].browse(messages.id)
-        _logger.info("CONTENIDO: %s", rs_msj.body)
+        _logger.info("CONTENIDO: %s credo el %s", rs_msj.body, rs_msj.create_date)
 
         # ==== Buscar Contacto ====
         contacto = self.env['res.partner'].search([('phone_sanitized','=',rs_msj.mobile_number)], limit=1)
