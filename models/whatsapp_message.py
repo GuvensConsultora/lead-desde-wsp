@@ -110,7 +110,7 @@ class DiscussChannel(models.Model):         # extendemos discuss.channel
             # -------------------------------------------
             time.sleep(2)                                               # delay humano
             super(DiscussChannel, self).message_post(                   # enviar por flujo nativo WA
-                body=_("Hola %(name)s, gracias por escribir. Te atiende %(seller)s ✅",
+                body=_("Hola %(name)s, gracias por escribir. Asignamos a  %(seller)s quien continuará comunicandose. ✅ ",
                         name=(partner.name or "allí"), seller=user.name),  # texto con vendedor
                 message_type="whatsapp_message",                        # WA saliente
                 parent_id=(message.id or parent_id),                    # responder al entrante
